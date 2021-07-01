@@ -186,7 +186,10 @@ export default class TextExpanderPlugin extends Plugin {
   }
 
   killHandler() {
-    this.child.kill();
+    if (this.child)
+    {
+      this.child.kill();
+    }
   }
 
   private readonly handleSubprocessStdout = (data: Buffer): void => {
@@ -318,7 +321,7 @@ export default class TextExpanderPlugin extends Plugin {
     const active_view = this.app.workspace.getActiveViewOfType(
       MarkdownView
     );
-    const vault_path = this.app.vault.adapter.basePath;
+    const vault_path = this.app.vault.getRoot().path;
     var inner_path = null;
     var file_name = null;
     var file_path = null;
